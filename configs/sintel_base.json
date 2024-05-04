@@ -1,0 +1,114 @@
+{
+    "data": {
+        "at_cfg": {
+            "cj": true,
+            "cj_bri": 0.3,
+            "cj_con": 0.3,
+            "cj_hue": 0.1,
+            "cj_sat": 0.3,
+            "gamma": false,
+            "gblur": true
+        },
+        "data_aug": {
+            "crop": true,
+            "hflip": true,
+            "para_crop": [384, 832],
+            "swap": true
+        },
+        "epoches_raw": 100,
+        "epoches_ft": -1,
+        "root_sintel": "YOUR_DIR/Sintel/",
+        "root_sintel_raw": "YOUR_DIR/Sintel-raw/",
+        "full_seg_root_sintel": "YOUR_DIR/full_seg/Sintel",
+        "full_seg_root_sintel_raw": "YOUR_DIR/full_seg/Sintel-raw",
+        "key_obj_root_sintel": "YOUR_DIR/key_objects/Sintel",
+        "key_obj_root_sintel_raw": "YOUR_DIR/key_objects/Sintel-raw",
+        "run_at": true,
+        "test_shape": [448, 1024],
+        "train_subsplit": "trainval",
+        "type": "Sintel_Raw+ft_2stage",
+        "val_subsplit": "trainval"
+    },
+    "loss": {
+        "edge_aware_alpha": 10,
+        "occ_from_back": true,
+        "smooth_type": "2nd",
+        "smooth_edge": "image",
+        "type": "unflow",
+        "w_l1": 0.15,
+        "w_ph_scales": [1.0, 1.0, 1.0, 1.0, 0.0],
+        "w_sm": 0,
+        "w_ssim": 0.85,
+        "w_ternary": 0.0,
+        "warp_pad": "border",
+        "with_bk": true
+    },
+    "model": {
+        "learned_upsampler": true,
+        "reduce_dense": true,
+        "type": "pwclite"
+    },
+    "seed": 42,
+    "train": {
+        "ar_eps": 0.0,
+        "ar_q": 1.0,
+        "batch_size": 8,
+        "beta": 0.999,
+        "bias_decay": 0,
+        "epoch_num": 200,
+        "epoch_size": 1000,
+        "key_obj_aug": false,
+        "lr": 0.0002,
+        "lr_scheduler": {
+            "module": "OneCycleLR",
+            "params": {
+                "max_lr": 0.0004,
+                "pct_start": 0.05,
+                "cycle_momentum": false,
+                "anneal_strategy": "linear"
+            }
+        },
+        "mask_st": true,
+        "max_grad_norm": 10,
+        "momentum": 0.9,
+        "n_gpu": 8,
+        "optim": "adam",
+        "pretrained_model": null,
+        "print_freq": 100,
+        "record_freq": 500,
+        "run_atst": false,
+        "run_ot": false,
+        "run_st": false,
+        "save_iter": 10000,
+        "st_cfg": {
+            "add_noise": true,
+            "hflip": true,
+            "rotate": [-0.2, 0.2, -0.015, 0.015],
+            "squeeze": [0.86, 1.16, 1.0, 1.0],
+            "trans": [0.2, 0.015],
+            "vflip": true,
+            "zoom": [1.0, 1.5, 0.985, 1.015]
+        },
+        "stage1": {
+            "epoch": 50,
+            "loss": {
+                "occ_from_back": false,
+                "w_l1": 0.0,
+                "w_ssim": 0.0,
+                "w_ternary": 1.0
+            },
+            "train": {
+                "ot_size": [320, 704],
+                "run_atst": true,
+                "run_ot": true,
+                "run_st": true
+            }
+        },
+        "val_epoch_size": 5,
+        "valid_size": 0,
+        "w_ar": 0.02,
+        "weight_decay": 1e-06,
+        "workers": 8
+    },
+    "trainer": "SINTEL_AR"
+}

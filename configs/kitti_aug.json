@@ -1,0 +1,13 @@
+{
+    "base_configs": "kitti_base.json",
+    "train": {
+        "stage2": {
+            "epoch": 150,
+            "train": {
+                "key_obj_aug": true,
+                "key_obj_count": 3,
+                "w_ar": 0.1
+            }
+        }
+    }
+}

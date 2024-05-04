@@ -1,0 +1,116 @@
+{
+    "data": {
+        "at_cfg": {
+            "cj": true,
+            "cj_bri": 0.3,
+            "cj_con": 0.3,
+            "cj_hue": 0.1,
+            "cj_sat": 0.3,
+            "gamma": false,
+            "gblur": true
+        },
+        "data_aug": {
+            "crop": false,
+            "hflip": true,
+            "swap": true
+        },
+        "epoches_raw": 100,
+        "epoches_mv": -1,
+        "root_kitti12": "YOUR_DIR/KITTI-2012/training/",
+        "root_kitti15": "YOUR_DIR/KITTI-2015/training/",
+        "root_raw": "YOUR_DIR/KITTI-raw/",
+        "full_seg_root_kitti12": "YOUR_DIR/full_seg/KITTI-2012/training/",
+        "full_seg_root_kitti15": "YOUR_DIR/full_seg/KITTI-2015/training/",
+        "full_seg_root_raw": "YOUR_DIR/full_seg/KITTI-raw/",
+        "key_obj_root_kitti12": "YOUR_DIR/key_objects/KITTI-2012/training/",
+        "key_obj_root_kitti15": "YOUR_DIR/key_objects/KITTI-2015/training/",
+        "key_obj_root_raw": "YOUR_DIR/key_objects/KITTI-raw/",
+        "run_at": true,
+        "test_shape": [256, 832],
+        "train_shape": [256, 832],
+        "type": "KITTI_Raw+MV_2stage"
+    },
+    "loss": {
+        "edge_aware_alpha": 10,
+        "occ_from_back": true,
+        "smooth_type": "2nd",
+        "smooth_edge": "image",
+        "type": "unflow",
+        "w_l1": 0.15,
+        "w_ph_scales": [1.0, 1.0, 1.0, 1.0, 0.0],
+        "w_sm": 0,
+        "w_ssim": 0.85,
+        "w_ternary": 0.0,
+        "warp_pad": "border",
+        "with_bk": true
+    },
+    "model": {
+        "learned_upsampler": true,
+        "reduce_dense": true,
+        "type": "pwclite"
+    },
+    "seed": 42,
+    "train": {
+        "ar_eps": 0.0,
+        "ar_q": 1.0,
+        "batch_size": 8,
+        "beta": 0.999,
+        "bias_decay": 0,
+        "epoch_num": 200,
+        "epoch_size": 1000,
+        "key_obj_aug": false,
+        "lr": 0.0002,
+        "lr_scheduler": {
+            "module": "OneCycleLR",
+            "params": {
+                "max_lr": 0.0004,
+                "pct_start": 0.05,
+                "cycle_momentum": false,
+                "anneal_strategy": "linear"
+            }
+        },
+        "mask_st": true,
+        "max_grad_norm": 10,
+        "momentum": 0.9,
+        "n_gpu": 8,
+        "optim": "adam",
+        "pretrained_model": null,
+        "print_freq": 100,
+        "record_freq": 500,
+        "run_atst": false,
+        "run_ot": false,
+        "run_st": false,
+        "save_iter": 10000,
+        "st_cfg": {
+            "add_noise": true,
+            "hflip": true,
+            "rotate": [-0.01, 0.01, -0.01, 0.01],
+            "squeeze": [1.0, 1.0, 1.0, 1.0],
+            "trans": [0.04, 0.005],
+            "vflip": false,
+            "zoom": [1.0, 1.4, 0.99, 1.01]
+        },
+        "stage1": {
+            "epoch": 50,
+            "loss": {
+                "occ_from_back": false,
+                "w_l1": 0.0,
+                "w_ssim": 0.0,
+                "w_ternary": 1.0
+            },
+            "train": {
+                "key_obj_aug": false,
+                "ot_size": [192, 640],
+                "run_atst": true,
+                "run_ot": true,
+                "run_st": true
+            }
+        },
+        "val_epoch_size": 5,
+        "valid_size": 0,
+        "w_ar": 0.02,
+        "weight_decay": 1e-06,
+        "workers": 8
+    },
+    "trainer": "KITTI_AR"
+}

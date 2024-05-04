@@ -1,0 +1,21 @@
+{
+    "base_configs": "sintel_base.json",
+    "model": {
+        "add_mask_corr": true,
+        "aggregation_type": "concat"
+    },
+    "train": {
+        "stage2": {
+            "epoch": 150,
+            "loss": {
+                "smooth_type": "homography",
+                "w_sm": 0.1
+            },
+            "train": {
+                "key_obj_aug": true,
+                "key_obj_count": 3,
+                "w_ar": 0.1
+            }
+        }
+    }
+}

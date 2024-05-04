@@ -1,0 +1,17 @@
+{
+    "base_configs": "sintel_base.json",
+    "train": {
+        "stage2": {
+            "epoch": 150,
+            "loss": {
+                "smooth_type": "homography",
+                "w_sm": 0.1
+            },
+            "train": {
+                "key_obj_aug": true,
+                "key_obj_count": 3,
+                "w_ar": 0.1
+            }
+        }
+    }
+}
